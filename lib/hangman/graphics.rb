@@ -16,7 +16,24 @@ HANG
   (•_•)
   <)  )╯
   /   \\
+
 WIN
+
+    STAYINALIVE = <<WIN2
+
+    \\(•_•)
+    (  (>
+    /   \\
+
+WIN2
+
+    STILLALIVE = <<WIN3
+
+    (•_•)
+    <)  )>
+    /   \\
+
+WIN3
 
     OBFUSCATION_CHAR = "👾"
 

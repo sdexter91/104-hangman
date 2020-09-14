@@ -40,7 +40,16 @@ module Hangman
           end
 
           unless placeholder.include? Graphics::OBFUSCATION_CHAR
+            Graphics.clear_screen
             puts Graphics::ALIVE
+            sleep 1
+            Graphics.clear_screen
+            puts Graphics::STAYINALIVE
+            sleep 1
+            Graphics.clear_screen
+            puts Graphics::STILLALIVE
+            sleep 1
+            Graphics.clear_screen
             puts "\n\nWELL DONE!! YOU SURVIVED"
             break
           end
@@ -64,6 +73,9 @@ module Hangman
           end
         end
       end
+        rescue Interrupt
+        Graphics.clear_screen
+        puts "Goodbye, cruel world!"
     end
   end
 end
