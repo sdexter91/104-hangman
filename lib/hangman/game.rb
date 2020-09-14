@@ -1,11 +1,12 @@
 module Hangman
   class Game
-    attr_reader :chances, :word, :wrong_tries, :guess
+    attr_reader :chances, :word, :wrong_tries, :guess, :incorrect_guess
 
     def initialize
       @chances = 5
       @wrong_tries = 0
       @guess = ""
+      @incorrect_guess = []
       @word = Dictionary.random
     end
 
@@ -17,6 +18,14 @@ module Hangman
         print "[#{chances - wrong_tries} chances left]: "
 
         char = gets.chomp
+          if char == ''
+            puts "Oops! That's not a letter. Please enter a letter A-Z."
+            next
+          end
+          if !(char =~ /[[:alpha:]]/)
+            puts "Oops! That's not a letter. Please enter a letter A-Z."
+            next
+          end
         Graphics.clear_screen
 
         if word.include? char
@@ -36,8 +45,15 @@ module Hangman
             break
           end
         else
+          if incorrect_guess.include?(char)
+            puts "You already guessed '#{char} - unfortunately it's STILL not correct."
+            puts 'Try again: ' + Graphics.obfuscate_word(word, guess)
+            next
+          end
+
           puts "OH NOES! The word doesn't contain '#{char}'"
           @wrong_tries = @wrong_tries + 1
+          incorrect_guess.push(char)
 
           if wrong_tries == chances
             puts Graphics::DEAD
